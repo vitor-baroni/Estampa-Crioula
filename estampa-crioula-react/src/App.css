@@ -300,7 +300,7 @@ svg {
     position: absolute;
     inset: 0;
     opacity: 0;
-    visibility: hidden;
+
     transition: opacity .55s ease, visibility .55s;
 }
 
@@ -564,7 +564,7 @@ svg {
     object-fit: cover;
     object-position: center;
     opacity: 0;
-    visibility: hidden;
+
     transition: opacity .35s ease, visibility .35s ease;
 }
 
@@ -608,7 +608,7 @@ svg {
     padding: 14px 18px 15px;
 }
 
-.product-card--with-gallery h2 {
+.product-card--with-gallery :is(h2, h3) {
     margin: 8px 0 6px;
     line-height: 1.18;
 }
@@ -701,7 +701,7 @@ svg {
     border: 1px solid rgba(255, 255, 255, .42);
     border-radius: 6px;
     opacity: 0;
-    visibility: hidden;
+
     pointer-events: none;
     transform: translateY(-50%);
     transition: opacity .18s, background .2s, transform .2s;
@@ -1142,7 +1142,6 @@ svg {
     }
 }
 
-/* Banner principal estático: sem troca de imagens, setas ou indicadores */
 .hero {
     grid-template-columns: minmax(0, 3fr) minmax(225px, 1fr);
 }
@@ -1169,7 +1168,6 @@ svg {
     grid-template-rows: repeat(2, auto);
 }
 
-/* Versão mobile baseada no wireframe */
 @media (max-width: 767px) {
     html,
     body,
@@ -1315,12 +1313,7 @@ svg {
         gap: 10px;
     }
 
-    .product-grid--five .product-card:nth-child(n+3),
-    .product-grid--rental .product-card:nth-child(n+3) {
-        display: none;
-    }
-
-    .product-card {
+.product-card {
         min-width: 0;
         min-height: 0;
         border-radius: 8px;
@@ -1334,7 +1327,7 @@ svg {
         padding: 9px 10px 11px;
     }
 
-    .product-card--with-gallery h2 {
+    .product-card--with-gallery :is(h2, h3) {
         margin: 4px 0 5px;
         font-size: .82rem;
         line-height: 1.2;
@@ -1357,10 +1350,7 @@ svg {
         font-size: .62rem;
     }
 
-    .product-card .product-card__previous,
-    .product-card .product-card__next {
-        display: none;
-    }
+
 
     .product-card--rental {
         height: 315px;
@@ -1418,7 +1408,6 @@ svg {
     }
 }
 
-/* Versão tablet baseada no wireframe */
 @media (min-width: 768px) and (max-width: 1100px) {
     .hero {
         grid-template-columns: 1fr;
@@ -1442,12 +1431,7 @@ svg {
         gap: 16px;
     }
 
-    .product-grid--five .product-card:nth-child(n+4),
-    .product-grid--rental .product-card:nth-child(n+4) {
-        display: none;
-    }
-
-    .product-card__gallery {
+.product-card__gallery {
         height: clamp(165px, 22vw, 215px);
     }
 
@@ -1465,5 +1449,13 @@ svg {
     .empty-banner--payment img {
         object-fit: contain;
         object-position: center;
+    }
+}
+
+@media (hover: none), (max-width: 767px) {
+    .product-card .product-card__previous,
+    .product-card .product-card__next {
+        opacity: 1;
+        pointer-events: auto;
     }
 }
