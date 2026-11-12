@@ -631,7 +631,7 @@ svg {
     width: 100%;
     min-height: 0;
     display: flex;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     flex-direction: column;
     align-items: flex-start;
     padding: 9px 10px 11px;
@@ -650,7 +650,7 @@ svg {
 }
 
 .product-card--with-gallery .price {
-    margin-top: 3px;
+    margin-top: auto;
     font-size: .78rem;
 }
 
@@ -801,16 +801,19 @@ svg {
 }
 
 .product-card--rental {
-    height: 315px;
+    height: auto;
+    min-height: 315px;
 }
 
 .product-card--rental .product-card__body {
-    height: 100%;
+    height: auto;
+    min-height: auto;
+    flex: 1 0 auto;
 }
 
 .product-card--rental-image .product-card__body {
     height: auto;
-    flex: 1;
+    flex: 1 0 auto;
 }
 
 .product-card--rental .price {
@@ -998,6 +1001,10 @@ svg {
 
 .footer-brand {
     grid-column: 1 / -1;
+}
+
+.product-card--vazio {
+    min-height: clamp(230px, 28vw, 360px);
 }
 
 @media (min-width: 768px) {
@@ -1200,7 +1207,7 @@ svg {
     }
 
     .product-card--rental {
-        height: 409px;
+        min-height: 409px;
     }
 
     .banner-row {
@@ -1297,7 +1304,7 @@ svg {
     }
 
     .product-card--rental {
-        height: clamp(450px, calc(396px + 3.75vw), 468px);
+        min-height: clamp(450px, calc(396px + 3.75vw), 468px);
     }
 
     .banner-row {
@@ -1330,5 +1337,92 @@ svg {
         transition-duration: .01ms !important;
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
+    }
+}
+
+.vitrine-janela {
+    overflow: clip;
+    padding-block: 4px;
+}
+
+.vitrine-faixa {
+    display: flex;
+    transition: transform .3s ease;
+}
+
+.vitrine-pagina {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+.vitrine-pontos {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.vitrine-pontos button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.vitrine-pontos button::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #d9d5d5;
+}
+
+.vitrine-pontos button[aria-current="true"]::before {
+    background: var(--wine);
+    transform: scale(1.25);
+}
+
+.vitrine-pontos button:focus-visible {
+    outline: 2px solid var(--wine);
+}
+
+.vitrine-linha {
+    display: flex;
+    align-items: center;
+    margin-inline: -10px;
+}
+
+.vitrine-linha .vitrine-janela {
+    flex: 1;
+    min-width: 0;
+}
+
+.vitrine-seta {
+    flex: 0 0 26px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--wine);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.vitrine-seta:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+@media (min-width: 768px) {
+    .vitrine-linha {
+        margin-inline: -32px;
+    }
+
+    .vitrine-seta {
+        flex-basis: 32px;
     }
 }

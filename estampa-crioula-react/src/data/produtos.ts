@@ -2,7 +2,7 @@ export type Produto = {
   id: number
   nome: string
   descricao: string
-  preco: number
+  preco: number | null
   fotos: { src: string; alt: string }[]
   ajustarFoto?: boolean
 }
@@ -92,81 +92,61 @@ export const produtos: Produto[] = [
   },
   {
     id: 6,
-    nome: "Vestido prenda - Adulto",
-    descricao: "Traje completo preparado para a ocasião.",
-    preco: 849.9,
+    nome: " Botas e guaiaca em couro marrom",
+    descricao: "Resistência e estilo para o dia a dia, com acabamento em couro de alta qualidade.",
+    preco: 699.9,
     fotos: [
       {
-        src: "assets/produtos/vestido-prenda-adulto-azul.png",
-        alt: "Vestido prenda adulto azul com detalhes bordados"
-      },
-      {
-        src: "assets/produtos/vestido-prenda-adulto-azul-detalhe.jpg",
-        alt: "Detalhe de Vestido prenda - Adulto"
+        src: "assets/produtos/bota-couro-marrom-mais-vendidos.png",
+        alt: "Par de botas de couro marrom em ambiente rústico"
       }
     ]
   },
   {
     id: 7,
-    nome: "Pilcha completa masculina - Adulto",
-    descricao: "Camisa, bombacha, faixa e acessórios.",
-    preco: 1199.9,
+    nome: " Faca de prata trabalhada com bainha decorada",
+    descricao: "Design elegante e funcional para uso diário.",
+    preco: 499.9,
     fotos: [
       {
-        src: "assets/produtos/pilcha-completa-masculina-adulto.png",
-        alt: "Pilcha completa masculina com camisa, colete, lenço e bombacha"
-      },
-      {
-        src: "assets/produtos/pilcha-completa-masculina-adulto-detalhe.jpg",
-        alt: "Detalhe de Pilcha completa masculina - Adulto"
+        src: "assets/produtos/faca-prateada-mais-vendidos.png",
+        alt: "Faca prateada trabalhada com bainha decorada"
       }
     ]
   },
   {
     id: 8,
-    nome: "Bota de couro tam. 41",
-    descricao: "Couro resistente, higienizada e pronta para uso.",
+    nome: "Poncho gaúcho tradicional marrom",
+    descricao: "Estilo e conforto para o dia a dia.",
     preco: 399.9,
     fotos: [
       {
-        src: "assets/produtos/bota-couro-aluguel.png",
-        alt: "Bota de couro preta de cano alto apoiada sobre tijolos"
-      },
-      {
-        src: "assets/produtos/bota-couro-aluguel-detalhe.jpg",
-        alt: "Detalhe de Bota de couro tam. 41"
+        src: "assets/produtos/gaucho-gaiteiro-mais-vendidos.png",
+        alt: "Gaúcho com poncho tradicional segurando uma gaita"
       }
     ]
   },
   {
     id: 9,
-    nome: "Sapatilha tradicional",
-    descricao: "Modelos confortáveis em diversas numerações.",
-    preco: 229.9,
+    nome: "Lenço escavino tradicional vermelho",
+    descricao: "Lenço  tradicional, ideal para complementar o seu traje gaúcho.",
+    preco: 159.9,
     fotos: [
       {
-        src: "assets/produtos/sapatilha-tradicional-aluguel.png",
-        alt: "Par de sapatilhas tradicionais pretas com tiras e fivelas"
-      },
-      {
-        src: "assets/produtos/sapatilha-tradicional-aluguel-detalhe.jpg",
-        alt: "Detalhe de Sapatilha tradicional"
+        src: "assets/produtos/lenco-gaucho-vermelho-mais-vendidos.png",
+        alt: "Lenço gaúcho vermelho sobre mesa de madeira com chapéu"
       }
     ]
   },
   {
     id: 10,
-    nome: "Bombacha tradicional",
-    descricao: "Modelo confortável disponível em diversos tamanhos.",
-    preco: 289.9,
+    nome: "Camafeu com brincos e pingente ornamentado",
+    descricao: "Conjunto de camafeu com brincos e pingente ornamentado, ideal para complementar o seu traje gaúcho.",
+    preco: 199.9,
     fotos: [
       {
-        src: "assets/produtos/bombacha-tradicional-aluguel.png",
-        alt: "Bombacha tradicional cinza acompanhada de botas pretas"
-      },
-      {
-        src: "assets/produtos/bombacha-tradicional-aluguel-detalhe.jpg",
-        alt: "Detalhe de Bombacha tradicional"
+        src: "assets/produtos/conjunto-camafeu-mais-vendidos.png",
+        alt: "Conjunto de camafeu com dois brincos e pingente ornamentado"
       }
     ]
   }

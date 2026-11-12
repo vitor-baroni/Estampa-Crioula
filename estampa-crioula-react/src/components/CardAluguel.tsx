@@ -5,6 +5,10 @@ type CardAluguelProps = {
 }
 
 export function CardAluguel({ item }: CardAluguelProps) {
+  if (!item.nome && !item.descricao && !item.imagem && !item.valor) {
+    return <article className="product-card product-card--rental product-card--vazio" aria-hidden="true" />
+  }
+
   return (
     <article className="product-card product-card--with-gallery product-card--rental product-card--rental-image">
       <div className="product-card__gallery">
