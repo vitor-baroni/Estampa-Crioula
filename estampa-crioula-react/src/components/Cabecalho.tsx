@@ -1,4 +1,14 @@
-export function Cabecalho() {
+type CabecalhoProps = {
+  escuro: boolean
+  aoAlternarTema: () => void
+  quantidadeCarrinho: number
+  carrinhoAberto: boolean
+  aoAbrirCarrinho: () => void
+  contaAberta: boolean
+  aoAbrirConta: () => void
+}
+
+export function Cabecalho({ escuro, aoAlternarTema, quantidadeCarrinho, carrinhoAberto, aoAbrirCarrinho, contaAberta, aoAbrirConta }: CabecalhoProps) {
   return (
     <>
     <a className="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -29,20 +39,37 @@ export function Cabecalho() {
             </form>
 
             <div className="header-actions">
-                <button className="account-button" type="button" aria-label="Minha conta">
+                <button className="theme-button" type="button" onClick={aoAlternarTema}
+                    aria-label={escuro ? 'Ativar modo claro' : 'Ativar modo escuro'}
+                    title={escuro ? 'Ativar modo claro' : 'Ativar modo escuro'} aria-pressed={escuro}>
+                    {escuro ? (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4" />
+                            <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+                        </svg>
+                    ) : (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z" />
+                        </svg>
+                    )}
+                </button>
+                <button className="account-button" type="button" aria-label="Minha conta"
+                    onClick={aoAbrirConta} aria-haspopup="dialog" aria-controls="minha-conta" aria-expanded={contaAberta}>
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="12" cy="8" r="4"></circle>
                         <path d="M4.8 21c.6-4.2 3-6.3 7.2-6.3s6.6 2.1 7.2 6.3"></path>
                     </svg>
                     <span>Minha conta</span>
                 </button>
-                <button className="cart-button" type="button" aria-label="Carrinho, vazio">
+                <button className="cart-button" type="button"
+                    onClick={aoAbrirCarrinho} aria-haspopup="dialog" aria-controls="carrinho" aria-expanded={carrinhoAberto}
+                    aria-label={`Carrinho, ${quantidadeCarrinho} ${quantidadeCarrinho === 1 ? 'produto' : 'produtos'}`}>
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M3 4h2l2.2 10.2h10.9l2-7.1H6"></path>
                         <circle cx="9" cy="19" r="1.3"></circle>
                         <circle cx="18" cy="19" r="1.3"></circle>
                     </svg>
-                    <span className="cart-count" aria-hidden="true">0</span>
+                    <span className="cart-count" aria-hidden="true">{quantidadeCarrinho}</span>
                 </button>
             </div>
         </div>
