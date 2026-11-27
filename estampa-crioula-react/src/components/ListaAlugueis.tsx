@@ -4,18 +4,25 @@ import { CardAluguel } from './CardAluguel'
 type ListaAlugueisProps = {
   grupos: Aluguel[][]
   pagina: number
+  mostrarTodos: boolean
+  aoAlternarTodos: () => void
   aoSelecionarPagina: (pagina: number) => void
+  favoritos: number[]
+  aoFavoritar: (id: number) => void
 }
 
-export function ListaAlugueis({ grupos, pagina, aoSelecionarPagina }: ListaAlugueisProps) {
+export function ListaAlugueis({ grupos, pagina, mostrarTodos, aoAlternarTodos, aoSelecionarPagina, favoritos, aoFavoritar }: ListaAlugueisProps) {
   return (
     <section className="product-section product-section--rental" id="aluguel">
       <div className="container product-section--wide">
       <div className="section-heading">
         <div><h2>Aluguel de pilchas</h2></div>
-        <a href="#aluguel">Como funciona <span aria-hidden="true">→</span></a>
+        <button className="view-all-button" type="button" aria-expanded={mostrarTodos}
+          aria-controls="vitrine-alugueis" onClick={aoAlternarTodos}>
+          {mostrarTodos ? 'Ver menos' : 'Ver todos'} <span aria-hidden="true">{mostrarTodos ? '↑' : '→'}</span>
+        </button>
       </div>
-      <div className="vitrine-linha">
+      <div className={`vitrine-linha${mostrarTodos ? ' vitrine-linha--all' : ''}`}>
         {grupos.length > 1 && (
           <button className="vitrine-seta" type="button" aria-controls="vitrine-alugueis"
             aria-label="Grupo anterior de pilchas para aluguel" disabled={pagina === 0}
@@ -24,10 +31,13 @@ export function ListaAlugueis({ grupos, pagina, aoSelecionarPagina }: ListaAlugu
           </button>
         )}
         <div className="vitrine-janela" id="vitrine-alugueis">
-          <div className="vitrine-faixa" style={{ transform: `translateX(-${Math.max(0, pagina) * 100}%)` }}>
+          <div className="vitrine-faixa" style={{ transform: mostrarTodos ? 'none' : `translateX(-${Math.max(0, pagina) * 100}%)` }}>
             {grupos.map((grupo, indice) => (
-              <div key={grupo[0].id} className="product-grid product-grid--rental vitrine-pagina" inert={indice !== pagina}>
-                {grupo.map(item => <CardAluguel key={item.id} item={item} />)}
+              <div key={grupo[0].id} className={`product-grid product-grid--rental vitrine-pagina${mostrarTodos ? ' product-grid--all' : ''}`} inert={indice !== pagina}>
+                {grupo.map(item => (
+                  <CardAluguel key={item.id} item={item}
+                    favorito={favoritos.includes(item.id)} aoFavoritar={aoFavoritar} />
+                ))}
               </div>
             ))}
           </div>

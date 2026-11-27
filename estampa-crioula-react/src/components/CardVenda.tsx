@@ -4,9 +4,13 @@ type CardVendaProps = {
   produto: Produto
   fotoAtiva: number
   aoSelecionarFoto: (id: number, indice: number) => void
+  favorito: boolean
+  aoFavoritar: (id: number) => void
+  noCarrinho: boolean
+  aoAdicionarCarrinho: (produto: Produto) => void
 }
 
-export function CardVenda({ produto, fotoAtiva, aoSelecionarFoto }: CardVendaProps) {
+export function CardVenda({ produto, fotoAtiva, aoSelecionarFoto, favorito, aoFavoritar, noCarrinho, aoAdicionarCarrinho }: CardVendaProps) {
   const foto = produto.fotos[fotoAtiva] ?? produto.fotos[0]
   const total = produto.fotos.length
 
@@ -24,6 +28,13 @@ export function CardVenda({ produto, fotoAtiva, aoSelecionarFoto }: CardVendaPro
 
   return (
     <article className="product-card product-card--with-gallery">
+      <button className="favorite-button" type="button" aria-pressed={favorito}
+        aria-label={`${favorito ? 'Remover dos favoritos' : 'Favoritar'}: ${produto.nome.trim()}`}
+        onClick={() => aoFavoritar(produto.id)}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" />
+        </svg>
+      </button>
       {foto && (
         <div className={produto.ajustarFoto ? 'product-card__gallery product-card__gallery--contain' : 'product-card__gallery'}>
           <img className="is-active" src={foto.src} alt={foto.alt} decoding="async" />
@@ -51,7 +62,11 @@ export function CardVenda({ produto, fotoAtiva, aoSelecionarFoto }: CardVendaPro
         {produto.preco !== null && (
           <strong className="price">{produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
         )}
-        <button className="add-cart" type="button">Adicionar ao carrinho</button>
+        <button className={`add-cart ${noCarrinho ? 'is-in-cart' : ''}`} type="button"
+          title={noCarrinho ? 'Adicionar mais uma unidade' : 'Adicionar ao carrinho'}
+          onClick={() => aoAdicionarCarrinho(produto)}>
+          {noCarrinho ? 'Produto no carrinho' : 'Adicionar ao carrinho'}
+        </button>
       </div>
     </article>
   )
